@@ -436,6 +436,10 @@ fastify.post("/v1/messages", async (request, reply) => {
   }
 });
 
+fastify.get("/", (request, reply) => {
+  reply.send("Hello World");
+});
+
 const start = async () => {
   try {
     await fastify.listen({ port: process.env.PORT || 3000 });
