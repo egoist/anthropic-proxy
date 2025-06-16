@@ -12,6 +12,7 @@ OPENROUTER_API_KEY=your-api-key npx anthropic-proxy
 
 Environment variables:
 
+- `AUTH_TOKEN`: Protect the API with an auth token, when specified your requests should include header `x-api-key: $AUTH_TOKEN` or `authorization: Bearer $AUTH_TOKEN`
 - `OPENROUTER_API_KEY`: Your OpenRouter API key (required when using OpenRouter)
 - `ANTHROPIC_PROXY_BASE_URL`: Custom base URL for the transformed OpenAI-format message (default: `openrouter.ai`)
 - `PORT`: The port the proxy server should listen on (default: 3000)

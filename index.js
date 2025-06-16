@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import { TextDecoder } from "util";
 
+const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const baseUrl =
   process.env.ANTHROPIC_PROXY_BASE_URL || "https://openrouter.ai/api";
 const requiresApiKey = !process.env.ANTHROPIC_PROXY_BASE_URL;
@@ -44,6 +45,14 @@ function mapStopReason(finishReason) {
 
 fastify.post("/v1/messages", async (request, reply) => {
   try {
+    let token = request.headers["x-api-key"];
+    if (!token) {
+      token = request.headers.authorization?.replace("Bearer ", "");
+    }
+    if (AUTH_TOKEN && token !== AUTH_TOKEN) {
+      throw new Error("AUTH_TOKEN validation failed");
+    }
+
     const payload = request.body;
 
     // Helper to normalize a message's content.
