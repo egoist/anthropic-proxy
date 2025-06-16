@@ -5,7 +5,7 @@ FROM oven/bun:1
 WORKDIR /app
 
 # Copy package.json and bun.lockb
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 
 # Install dependencies
 RUN bun install --frozen-lockfile
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the application
-CMD ["bun", "run", "index.js"]
+CMD ["bun", "start"]
